@@ -25,7 +25,9 @@ angular.module('starter.controllers')
         $ionicSlideBoxDelegate.previous();
     }
 
-    $scope.login = function(){
+    $scope.loginEmail = function(){
+        $state.go('main.home');
+        /*
         Auth.$authWithPassword({
             email: $scope.data.email,
             password: $scope.data.password
@@ -35,6 +37,7 @@ angular.module('starter.controllers')
         }).catch(function(error) {
             console.log('Login failed with error: ', error);
         });
+       */
     };
 
     $scope.signupEmail = function() {

@@ -1,0 +1,138 @@
+<ion-modal-view>
+	<ion-header-bar>
+        <button ng-click="closeModal()" class="button button-clear">
+          	<i class="icon ion-close-round"></i>
+        </button>
+        <h1 class="title">Let's Start Sweating...</h1>
+    </ion-header-bar>
+    <ion-content class="has-header has-footer">
+        <ion-slide-box delegate-handle="modalSlider" show-pager="false">
+        <ion-slide class="padding">            
+        <h4> When are you planning to work out? </h4>
+        <button class="button button-full button-calm" ng-click="openDatePicker()">
+            Pick date
+        </button>
+
+
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="closeModal()">
+            Cancel
+        </button>
+
+        </ion-slide> <!-- End of name/email/pw form -->
+        
+        <!-- Start of gender form -->
+        <ion-slide class="padding">  
+        <h4> What is your gender? </h4>
+        <ion-list>
+           <ion-radio ng-model="gender" ng-value="'M'">Male</ion-radio>
+            <ion-radio ng-model="gender" ng-value="'F'">Female</ion-radio>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of gender form -->
+
+        <!-- Start of H/W form -->
+        <ion-slide class="padding">  
+        <ion-list class="hw">
+            <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Height</span>
+                <input type="text" placeholder="Height">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Weight</span>
+                <input type="text" placeholder="Weight">
+            </label>
+            </div>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of H/W form -->
+
+
+        <!-- Start of Expertise form -->
+        <ion-slide class="padding">  
+        <h4> What describes your workout experience most accurately? </h4>
+        <ion-list class="expertise">
+           <ion-radio ng-model="expertise" ng-value="'Beginner'">Beginner</ion-radio>
+           <ion-radio ng-model="expertise" ng-value="'Expert'">Expert</ion-radio>
+           <ion-radio ng-model="expertise" ng-value="'Intermediate'">Neither, In between</ion-radio>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of Expertise form -->
+
+        <!-- Start of Goals form -->
+        <ion-slide class="padding">  
+        <h4> What are your goals? </h4>
+        <ion-list>
+          <ion-checkbox ng-model="goal.lean">Get Lean</ion-checkbox>
+          <ion-checkbox ng-model="goal.fit">Get Fit</ion-checkbox>
+          <ion-checkbox ng-model="goal.muscles">Build Muscles</ion-checkbox>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of Goals form -->
+
+        <!-- Start of Partner-Expectation form -->
+        <ion-slide class="padding">  
+        <h4> What do you want from your partner?</h4>
+        <ion-list class="partner-expectation">
+          <ion-checkbox ng-model="partner-expectation.goal">Same Goal</ion-checkbox>
+          <ion-checkbox ng-model="partner-expectation.gender">Same Gender</ion-checkbox>
+          <ion-checkbox ng-model="partner-expectation.level">Similar Level</ion-checkbox>
+          <ion-checkbox ng-model="partner-expectation.sociability">Sociability</ion-checkbox>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of Parter-Expectation form -->
+        <!-- Start of Partner-Expectation form -->
+        <ion-slide class="padding">  
+        <h4> What do you expect from this app?</h4>
+        <ion-list class="app-expectation">
+          <ion-checkbox ng-model="app-expectation.motivation">Motivation to workout</ion-checkbox>
+          <ion-checkbox ng-model="app-expectation.lessons">Lessons/Tips on how to workout</ion-checkbox>
+          <ion-checkbox ng-model="app-expectation.meet">Chance to meet new people</ion-checkbox>
+          <ion-checkbox ng-model="app-expectation.fun">More fun during workout</ion-checkbox>
+        </ion-list>
+        <button class="button button-full button-calm" ng-click="nextSlide()">
+            Next
+        </button>
+        <button class="button button-full button-assertive" ng-click="prevSlide()">
+            Back
+        </button>
+        </ion-slide>
+        <!-- End of Goals form -->
+
+
+        </ion-slide-box>
+    </ion-content>
+</ion-modal-view>
