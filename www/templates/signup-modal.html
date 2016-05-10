@@ -1,0 +1,36 @@
+<ion-modal-view>
+	<ion-header-bar>
+        <button ng-click="closeSelectModal()" class="button button-clear">
+          	<i ng-if="selectModalSlider.currentIndex() == 0" class="icon ion-close-round"></i>
+          	<i ng-if="selectModalSlider.currentIndex() > 0" class="icon ion-chevron-left"></i>
+        </button>
+        <h1 class="title">Select something</h1>
+        <button ng-click="submitSelection()" class="button button-balanced" ng-disabled="!itemSelected">
+          	<i class="icon ion-checkmark-round"></i>
+        </button>
+    </ion-header-bar>
+    <ion-content class="has-header has-footer">
+        <ion-slide-box delegate-handle="modalSlider" show-pager="false">
+          	<ion-slide class="padding">            
+            	<h3>Select category</h3>            
+            	<div class="list">
+            		<div class="item" ng-repeat="cat in categoryList" ng-click="selectCategory(cat)">
+                	{{cat.title}}
+              		</div>
+            	</div>
+          	</ion-slide>
+          	<ion-slide class="padding">
+            	<h3>Select item</h3>
+            	<div class="list">
+              		<label class="item item-radio" ng-repeat="item in list">
+                		<input type="radio" name="titleDraft" ng-click="selectItem(item)">
+                		<div class="item-content">
+                  		{{item.title}}
+                		</div>
+                		<i class="radio-icon ion-checkmark"></i>
+              		</label>
+            	</div>
+          	</ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-modal-view>

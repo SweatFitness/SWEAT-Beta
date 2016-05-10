@@ -1,7 +1,16 @@
 angular.module('starter.controllers')
-.controller('LoginCtrl', ['$scope', '$state', 'Auth', 'UsersList', function($scope, $state, Auth, UsersList) {
+.controller('LoginCtrl', ['$scope', '$state', '$ionicModal', '$ionicSlideBoxDelegate', 'Auth', 'UsersList', function($scope, $state, $ionicModal, $ionicSlideBoxDelegate, Auth, UsersList) {
     $scope.data = {};
     $scope.usersRef = new Firebase('https://sweat-fitness.firebaseio.com/users');
+
+    $ionicModal.fromTemplateUrl('templates/signup-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.selectModal = modal;
+        $scope.selectModalSlider = $ionicSlideBoxDelegate.$getByHandle('modalSlider');
+        $scope.selectModalSlider.enableSlide(false);
+    })
 
     $scope.loginEmail = function(){
         Auth.$authWithPassword({
