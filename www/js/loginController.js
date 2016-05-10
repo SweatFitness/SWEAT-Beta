@@ -7,12 +7,25 @@ angular.module('starter.controllers')
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {
+        console.log('test');
         $scope.selectModal = modal;
         $scope.selectModalSlider = $ionicSlideBoxDelegate.$getByHandle('modalSlider');
         $scope.selectModalSlider.enableSlide(false);
-    })
+    });
 
-    $scope.loginEmail = function(){
+    $scope.closeModal = function() {
+        $scope.selectModal.hide();
+    }
+
+    $scope.nextSlide = function() {
+        $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.prevSlide = function() {
+        $ionicSlideBoxDelegate.previous();
+    }
+
+    $scope.login = function(){
         Auth.$authWithPassword({
             email: $scope.data.email,
             password: $scope.data.password
