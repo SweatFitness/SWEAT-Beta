@@ -11,19 +11,19 @@
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">First Name</span>
-                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="First Name" ng-model="data.firstname">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Last Name</span>
-                <input type="text" placeholder="Last Name">
+                <input type="text" placeholder="Last Name" ng-model="data.lastname">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Email</span>
-                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Email" ng-model="data.email">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" ng-model="data.password">
             </label>
         </div>
         <button class="button button-full button-calm" ng-click="nextSlide()">
@@ -137,8 +137,8 @@
           <ion-checkbox ng-model="app_expectation.meet">Chance to meet new people</ion-checkbox>
           <ion-checkbox ng-model="app_expectation.fun">More fun during workout</ion-checkbox>
         </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
-            Next
+        <button class="button button-full button-calm" ng-click="signupEmail()">
+            Done
         </button>
         <button class="button button-full button-assertive" ng-click="prevSlide()">
             Back

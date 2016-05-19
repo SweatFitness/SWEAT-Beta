@@ -40,8 +40,10 @@ angular.module('starter.controllers')
         { text: "Expert", value: "expert" }
     ];
 
-    $scope.usersRef = new Firebase('https://sweat-fitness.firebaseio.com/users');
+    $scope.usersRef = new Firebase('https://sweatfitness.firebaseio.com/user')
 
+
+    // This brings up signup modals
     $ionicModal.fromTemplateUrl('templates/signup-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -57,9 +59,6 @@ angular.module('starter.controllers')
     }
 
     $scope.nextSlide = function() {
-        console.log($scope.partner_expectation);
-        console.log($scope.gender);
-        console.log($scope.experience);
         $ionicSlideBoxDelegate.next();
     }
 
@@ -69,7 +68,6 @@ angular.module('starter.controllers')
 
     $scope.loginEmail = function(){
         $state.go('main.home');
-        /*
         Auth.$authWithPassword({
             email: $scope.data.email,
             password: $scope.data.password
@@ -79,12 +77,12 @@ angular.module('starter.controllers')
         }).catch(function(error) {
             console.log('Login failed with error: ', error);
         });
-       */
     };
 
     $scope.signupEmail = function() {
         //TODO: rewrite this function
         //TODO: actually, separate this into another controller
+        // Form list of goals
         Auth.$createUser({
             email: $scope.data.email,
             password: $scope.data.password
@@ -93,9 +91,14 @@ angular.module('starter.controllers')
             $scope.usersRef.child(userData.uid).set({
                 provider: 'password',
                 firstname: $scope.data.firstname,
-                lastname: $scope.data.lastname
+                lastname: $scope.data.lastname,
+                gender: $scope.gender,
+                experience: $scope.goal,
+                p_expectations: $scope.partner_expectation,
+                a_expectations: $scope.app_expectation,
             });
             $scope.loginEmail();
+            $scope.closeModal();
         }).catch(function(error) {
             console.log('User creation failed with error: ', error);
         });

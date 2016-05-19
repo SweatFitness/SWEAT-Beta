@@ -1,15 +1,15 @@
 angular.module('starter.controllers', [])
 .factory('Auth', ['$firebaseAuth', function ($firebaseAuth) {
-    var usersRef = new Firebase('https://sweat-fitness.firebaseio.com/users');
+    var usersRef = new Firebase('https://sweatfitness.firebaseio.com/users');
     return $firebaseAuth(usersRef);
 }])
 
 .factory('UsersList', ['$firebaseArray', function($firebaseArray) {
-    var usersRef = new Firebase('https://sweat-fitness.firebaseio.com/users');
+    var usersRef = new Firebase('https://sweatfitness.firebaseio.com/users');
     return $firebaseArray(usersRef);
 }])
 
 .factory('Workouts', ['$firebaseArray', function($firebaseArray) {
-    var workoutsRef = new Firebase('https://sweat-fitness.firebaseio.com/workouts');
+    var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
     return $firebaseArray(workoutsRef);
 }])
