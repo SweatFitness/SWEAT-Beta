@@ -39,8 +39,9 @@
         <ion-slide class="padding">  
         <h4> What is your gender? </h4>
         <ion-list>
-           <ion-radio ng-model="gender" ng-value="'M'">Male</ion-radio>
-            <ion-radio ng-model="gender" ng-value="'F'">Female</ion-radio>
+            <ion-radio ng-repeat="item in genderList" ng-value="item.value" ng-model="gender" ng-change="updateGender(item)">
+                {{item.text}}
+            </ion-radio>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -79,9 +80,10 @@
         <ion-slide class="padding">  
         <h4> What describes your workout experience most accurately? </h4>
         <ion-list class="expertise">
-           <ion-radio ng-model="expertise" ng-value="'Beginner'">Beginner</ion-radio>
-           <ion-radio ng-model="expertise" ng-value="'Expert'">Expert</ion-radio>
-           <ion-radio ng-model="expertise" ng-value="'Intermediate'">Neither, In between</ion-radio>
+            
+            <ion-radio ng-repeat="item in experienceList" ng-value="item.value" ng-model="experience" ng-change="updateExperience(item)">
+                {{item.text}}
+            </ion-radio>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -112,11 +114,11 @@
         <!-- Start of Partner-Expectation form -->
         <ion-slide class="padding">  
         <h4> What do you want from your partner?</h4>
-        <ion-list class="partner-expectation">
-          <ion-checkbox ng-model="partner-expectation.goal">Same Goal</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.gender">Same Gender</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.level">Similar Level</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.sociability">Sociability</ion-checkbox>
+        <ion-list class="partner_expectation">
+          <ion-checkbox ng-model="partner_expectation.goal">Same Goal</ion-checkbox>
+          <ion-checkbox ng-model="partner_expectation.gender">Same Gender</ion-checkbox>
+          <ion-checkbox ng-model="partner_expectation.level">Similar Level</ion-checkbox>
+          <ion-checkbox ng-model="partner_expectation.sociability">Sociability</ion-checkbox>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -129,11 +131,11 @@
         <!-- Start of Partner-Expectation form -->
         <ion-slide class="padding">  
         <h4> What do you expect from this app?</h4>
-        <ion-list class="app-expectation">
-          <ion-checkbox ng-model="app-expectation.motivation">Motivation to workout</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.lessons">Lessons/Tips on how to workout</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.meet">Chance to meet new people</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.fun">More fun during workout</ion-checkbox>
+        <ion-list class="app_expectation">
+          <ion-checkbox ng-model="app_expectation.motivation">Motivation to workout</ion-checkbox>
+          <ion-checkbox ng-model="app_expectation.lessons">Lessons/Tips on how to workout</ion-checkbox>
+          <ion-checkbox ng-model="app_expectation.meet">Chance to meet new people</ion-checkbox>
+          <ion-checkbox ng-model="app_expectation.fun">More fun during workout</ion-checkbox>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -143,8 +145,6 @@
         </button>
         </ion-slide>
         <!-- End of Goals form -->
-
-
         </ion-slide-box>
     </ion-content>
 </ion-modal-view>

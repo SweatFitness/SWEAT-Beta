@@ -1,6 +1,45 @@
 angular.module('starter.controllers')
 .controller('LoginCtrl', ['$scope', '$state', '$ionicModal', '$ionicSlideBoxDelegate', 'Auth', 'UsersList', function($scope, $state, $ionicModal, $ionicSlideBoxDelegate, Auth, UsersList) {
     $scope.data = {};
+
+    // Form variables
+    $scope.goal = {};
+    $scope.goal.lean = false;
+    $scope.goal.fit = false;
+    $scope.goal.muscles = false;
+
+
+    $scope.partner_expectation = {};
+    $scope.partner_expectation.goal = false;
+    $scope.partner_expectation.gender = false;
+    $scope.partner_expectation.level = false;
+    $scope.partner_expectation.level = false;
+
+    $scope.app_expectation = {};
+    $scope.app_expectation.motivation = false;
+    $scope.app_expectation.lessons = false;
+    $scope.app_expectation.meet = false;
+    $scope.app_expectation.fun = false;
+
+    $scope.genderList = [
+        { text: "Male", value: "male" },
+        { text: "Female", value: "female" }
+    ];
+
+    $scope.updateGender = function(gender) {
+        $scope.gender = gender.value;
+    }
+
+    $scope.updateExperience = function(experience) {
+        $scope.experience = experience.value;
+    }
+
+    $scope.experienceList = [
+        { text: "Beginner", value: "beginner" },
+        { text: "Intermediate", value: "intermediate" },
+        { text: "Expert", value: "expert" }
+    ];
+
     $scope.usersRef = new Firebase('https://sweat-fitness.firebaseio.com/users');
 
     $ionicModal.fromTemplateUrl('templates/signup-modal.html', {
@@ -18,6 +57,9 @@ angular.module('starter.controllers')
     }
 
     $scope.nextSlide = function() {
+        console.log($scope.partner_expectation);
+        console.log($scope.gender);
+        console.log($scope.experience);
         $ionicSlideBoxDelegate.next();
     }
 
