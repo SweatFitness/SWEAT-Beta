@@ -1,5 +1,8 @@
 angular.module('starter.controllers')
-.controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'Auth', 'UsersList', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, Auth, UsersList) {
+.controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList) {
+    $scope.pickedDate = 'No workout date chosen yet!';
+    $scope.pickedTime = 'No workout time chosen yet!';
+
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
@@ -13,19 +16,29 @@ angular.module('starter.controllers')
             ]
         });
     }
+    var ipObj2 = {
+        callback: function (val) {      //Mandatory
+            if (typeof (val) === 'undefined') {
+                console.log('Time not selected');
+            } else {
+                var selectedTime = new Date(val * 1000);
+                console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'H :', selectedTime.getUTCMinutes(), 'M');
+                $scope.pickedTime = selectedTime.toLocaleTimeString();
+            }
+        },
+        inputTime: 50400,   //Optional
+        format: 12,         //Optional
+        step: 15,           //Optional
+        setLabel: 'Set Time'    //Optional
+    };
 
     var ipObj1 = {
         callback: function (val) {  //Mandatory
             console.log('Return value from the datepicker popup is : ' + val, new Date(val));
+            date = new Date(val);
+            $scope.pickedDate = date.toDateString();
         },
         disabledDates: [            //Optional
-            new Date(2016, 2, 16),
-            new Date(2015, 3, 16),
-            new Date(2015, 4, 16),
-            new Date(2015, 5, 16),
-            new Date('Wednesday, August 12, 2015'),
-            new Date("08-16-2016"),
-            new Date(1439676000000)
         ],
         from: new Date(2012, 1, 1), //Optional
         to: new Date(2016, 10, 30), //Optional
@@ -34,6 +47,10 @@ angular.module('starter.controllers')
         disableWeekdays: [0],       //Optional
         closeOnSelect: false,       //Optional
         templateType: 'modal'       //Optional
+    };
+
+    $scope.openTimePicker = function() {
+        ionicTimePicker.openTimePicker(ipObj2);
     };
 
     $scope.openDatePicker = function(){

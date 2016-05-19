@@ -9,10 +9,18 @@
         <ion-slide-box delegate-handle="modalSlider" show-pager="false">
         <ion-slide class="padding">            
         <h4> When are you planning to work out? </h4>
-        <button class="button button-full button-calm" ng-click="openDatePicker()">
+        <div class="row">
+            {{ pickedDate }}
+        </div>
+        <div class="row">
+            {{ pickedTime }}
+        </div>
+        <button class="button button-full button-balanced" ng-click="openDatePicker()">
             Pick date
         </button>
-
+        <button class="button button-full button-balanced" ng-click="openTimePicker()">
+            Pick time
+        </button>
 
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -20,8 +28,7 @@
         <button class="button button-full button-assertive" ng-click="closeModal()">
             Cancel
         </button>
-
-        </ion-slide> <!-- End of name/email/pw form -->
+        </ion-slide> <!-- End of datepicker -->
         
         <!-- Start of gender form -->
         <ion-slide class="padding">  
