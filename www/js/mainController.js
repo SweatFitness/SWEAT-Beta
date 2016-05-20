@@ -110,6 +110,6 @@ angular.module('starter.controllers')
             date: $scope.pickedDate,
             time: $scope.pickedTime
         });
+        $scope.closeModal();
     }
-
 }]);
