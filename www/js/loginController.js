@@ -67,7 +67,7 @@ angular.module('starter.controllers')
     }
 
     $scope.loginEmail = function(){
-        $state.go('main.home');
+        //$state.go('main.home');
         Auth.$authWithPassword({
             email: $scope.data.email,
             password: $scope.data.password

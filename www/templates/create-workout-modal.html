@@ -30,12 +30,14 @@
         </button>
         </ion-slide> <!-- End of datepicker -->
         
-        <!-- Start of gender form -->
+        <!-- Start of location form -->
         <ion-slide class="padding">  
-        <h4> What is your gender? </h4>
+        <h4> Where are you working out? </h4>
         <ion-list>
-           <ion-radio ng-model="gender" ng-value="'M'">Male</ion-radio>
-            <ion-radio ng-model="gender" ng-value="'F'">Female</ion-radio>
+            <ion-radio ng-repeat="item in locationList" ng-value="item.value" ng-model="experience" ng-change="updateLocation(item)">
+
+                {{item.text}}
+            </ion-radio>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -48,17 +50,21 @@
 
         <!-- Start of H/W form -->
         <ion-slide class="padding">  
-        <ion-list class="hw">
-            <div class="list">
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Height</span>
-                <input type="text" placeholder="Height">
-            </label>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Weight</span>
-                <input type="text" placeholder="Weight">
-            </label>
-            </div>
+        <h4> What type of workout will you be doing? </h4>
+        <br />
+        <h4> (Choose all that you're interested in) </h4>
+        <h3> Cardio </h3>
+        <ion-list>
+        <ion-checkbox ng-model="workouts.cardio.running">Running</ion-checkbox>
+        <ion-checkbox ng-model="workouts.cardio.cycling">Cycling</ion-checkbox>
+        <ion-checkbox ng-model="workouts.cardio.swimming">Swimming</ion-checkbox>
+        </ion-list>
+
+        <h3> Weightlifting </h3>
+        <ion-list>
+        <ion-checkbox ng-model="workouts.weight.triceps">Chest/Triceps</ion-checkbox>
+        <ion-checkbox ng-model="workouts.weight.biceps">Back/Biceps</ion-checkbox>
+        <ion-checkbox ng-model="workouts.weight.legs">Legs</ion-checkbox>
         </ion-list>
         <button class="button button-full button-calm" ng-click="nextSlide()">
             Next
@@ -67,79 +73,23 @@
             Back
         </button>
         </ion-slide>
-        <!-- End of H/W form -->
-
+        <!-- End of Workout type form -->
 
         <!-- Start of Expertise form -->
         <ion-slide class="padding">  
-        <h4> What describes your workout experience most accurately? </h4>
-        <ion-list class="expertise">
-           <ion-radio ng-model="expertise" ng-value="'Beginner'">Beginner</ion-radio>
-           <ion-radio ng-model="expertise" ng-value="'Expert'">Expert</ion-radio>
-           <ion-radio ng-model="expertise" ng-value="'Intermediate'">Neither, In between</ion-radio>
+        <h4> How many people do you want to work out with?</h4>
+        <ion-list class="numpeople">
+            <ion-radio ng-repeat="item in numPeopleList" ng-value="item.value" ng-model="numpeople" ng-change="updateNumPeople(item)">
+                {{item.text}}
+            </ion-radio>
         </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
-            Next
+        <button class="button button-full button-calm" ng-click="createWorkout()">
         </button>
         <button class="button button-full button-assertive" ng-click="prevSlide()">
             Back
         </button>
         </ion-slide>
         <!-- End of Expertise form -->
-
-        <!-- Start of Goals form -->
-        <ion-slide class="padding">  
-        <h4> What are your goals? </h4>
-        <ion-list>
-          <ion-checkbox ng-model="goal.lean">Get Lean</ion-checkbox>
-          <ion-checkbox ng-model="goal.fit">Get Fit</ion-checkbox>
-          <ion-checkbox ng-model="goal.muscles">Build Muscles</ion-checkbox>
-        </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
-            Next
-        </button>
-        <button class="button button-full button-assertive" ng-click="prevSlide()">
-            Back
-        </button>
-        </ion-slide>
-        <!-- End of Goals form -->
-
-        <!-- Start of Partner-Expectation form -->
-        <ion-slide class="padding">  
-        <h4> What do you want from your partner?</h4>
-        <ion-list class="partner-expectation">
-          <ion-checkbox ng-model="partner-expectation.goal">Same Goal</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.gender">Same Gender</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.level">Similar Level</ion-checkbox>
-          <ion-checkbox ng-model="partner-expectation.sociability">Sociability</ion-checkbox>
-        </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
-            Next
-        </button>
-        <button class="button button-full button-assertive" ng-click="prevSlide()">
-            Back
-        </button>
-        </ion-slide>
-        <!-- End of Parter-Expectation form -->
-        <!-- Start of Partner-Expectation form -->
-        <ion-slide class="padding">  
-        <h4> What do you expect from this app?</h4>
-        <ion-list class="app-expectation">
-          <ion-checkbox ng-model="app-expectation.motivation">Motivation to workout</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.lessons">Lessons/Tips on how to workout</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.meet">Chance to meet new people</ion-checkbox>
-          <ion-checkbox ng-model="app-expectation.fun">More fun during workout</ion-checkbox>
-        </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
-            Next
-        </button>
-        <button class="button button-full button-assertive" ng-click="prevSlide()">
-            Back
-        </button>
-        </ion-slide>
-        <!-- End of Goals form -->
-
-
         </ion-slide-box>
     </ion-content>
 </ion-modal-view>

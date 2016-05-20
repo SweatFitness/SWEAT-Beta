@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList) {
+.controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', 'Workouts', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList, Workouts) {
     $scope.pickedDate = 'No workout date chosen yet!';
     $scope.pickedTime = 'No workout time chosen yet!';
 
@@ -77,4 +77,39 @@ angular.module('starter.controllers')
     $scope.prevSlide = function() {
         $ionicSlideBoxDelegate.previous();
     }
+
+
+    $scope.locationList = [
+        { text: "SPAC", value: "SPAC" },
+        { text: "Blom", value: "Blom" },
+        { text: "Patten", value: "Patten" }
+    ];
+
+    $scope.numPeopleList = [
+        { text: "1", value: 1 },
+        { text: "2", value: 2 },
+        { text: "3", value: 3 },
+        { text: "4", value: 4 },
+        { text: "More than 4", value: 100 }
+    ];
+
+    $scope.updateLocation = function(location) {
+        $scope.location = location.value;
+    }
+
+    $scope.updateNumPeople = function(numpeople) {
+        $scope.numpeople = numpeople.value;
+    }
+
+    $scope.createWorkout = function() {
+        var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
+        Workouts.$add({
+            owner: Auth.$getAuth().uid,
+            location: $scope.location,
+            numpeople: $scope.numpeople,
+            date: $scope.pickedDate,
+            time: $scope.pickedTime
+        });
+    }
+
 }]);
