@@ -1,7 +1,8 @@
 angular.module('starter.controllers')
 .controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', 'Workouts', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList, Workouts) {
-    $scope.pickedDate = 'No workout date chosen yet!';
-    $scope.pickedTime = 'No workout time chosen yet!';
+    $scope.pickedDate = 'Pick a date';
+    $scope.startTime = 'Pick a start time';
+    $scope.endTime = 'Pick an end time';
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -15,21 +16,50 @@ angular.module('starter.controllers')
                 { text: 'Close' }
             ]
         });
-    }
+    };
+
+    var epochToUTC = function(st) {
+        var hours = st.getUTCHours(),
+            mins = st.getUTCMinutes();
+        var AMPM = 'AM';
+        if (mins < 10) {
+            mins = '0' + mins;
+        }
+        if (hours > 12) {
+            hours -= 12;
+            AMPM = 'PM';
+        }
+        return hours + ':' + mins + ' ' + AMPM;
+    };
+
     var ipObj2 = {
         callback: function (val) {      //Mandatory
             if (typeof (val) === 'undefined') {
                 console.log('Time not selected');
             } else {
                 var selectedTime = new Date(val * 1000);
-                console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'H :', selectedTime.getUTCMinutes(), 'M');
-                $scope.pickedTime = selectedTime.toLocaleTimeString();
+                $scope.startTime = epochToUTC(selectedTime);
             }
         },
         inputTime: 50400,   //Optional
         format: 12,         //Optional
         step: 15,           //Optional
-        setLabel: 'Set Time'    //Optional
+        setLabel: 'Set Start Time'    //Optional
+    };
+
+    var ipObj3 = {
+        callback: function (val) {      //Mandatory
+            if (typeof (val) === 'undefined') {
+                console.log('Time not selected');
+            } else {
+                var selectedTime = new Date(val * 1000);
+                $scope.endTime = epochToUTC(selectedTime);
+            }
+        },
+        inputTime: 50400,   //Optional
+        format: 12,         //Optional
+        step: 15,           //Optional
+        setLabel: 'Set End Time'    //Optional
     };
 
     var ipObj1 = {
@@ -44,19 +74,24 @@ angular.module('starter.controllers')
         to: new Date(2016, 10, 30), //Optional
         inputDate: new Date(),      //Optional
         mondayFirst: true,          //Optional
-        disableWeekdays: [0],       //Optional
         closeOnSelect: false,       //Optional
         templateType: 'modal'       //Optional
     };
-
-    $scope.openTimePicker = function() {
+    
+    $scope.openStartTimePicker = function() {
         ionicTimePicker.openTimePicker(ipObj2);
+    };
+
+    // Fuck me, just make it work
+    $scope.openEndTimePicker = function() {
+        ionicTimePicker.openTimePicker(ipObj3);
     };
 
     $scope.openDatePicker = function(){
         ionicDatePicker.openDatePicker(ipObj1);
     };
 
+    
     $ionicModal.fromTemplateUrl('templates/create-workout-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -102,14 +137,34 @@ angular.module('starter.controllers')
     }
 
     $scope.createWorkout = function() {
-        var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
         Workouts.$add({
             owner: Auth.$getAuth().uid,
             location: $scope.location,
             numpeople: $scope.numpeople,
             date: $scope.pickedDate,
-            time: $scope.pickedTime
+            startTime: $scope.pickedTime,
+            endTime: $scope.pickedTime
         });
         $scope.closeModal();
     }
+
+    $scope.findSuggestions = function(newWorkout) {
+        var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
+        workoutsRef.once('value', function(snapshot) {
+            allWorkouts = snapshot.val();
+            match = [];
+            /*
+            allWorkouts.forEach(function(workout) {
+                // Check date
+                if (workout.date != newWorkout) {
+                    continue;
+                }
+                // Check time
+            });
+           */
+        });
+    }
+
+
+
 }]);
