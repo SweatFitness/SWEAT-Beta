@@ -92,6 +92,7 @@ angular.module('starter.controllers')
                 provider: 'password',
                 firstname: $scope.data.firstname,
                 lastname: $scope.data.lastname,
+                phone: $scope.data.phone,
                 gender: $scope.gender,
                 experience: $scope.goal,
                 p_expectations: $scope.partner_expectation,
