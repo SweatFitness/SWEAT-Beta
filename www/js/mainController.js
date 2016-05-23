@@ -31,6 +31,22 @@ angular.module('starter.controllers')
         $scope.selectModal.show();
     }
 
+    var to24Hours = function(timeStr) {
+        if (timeStr.indexOf('AM') < 0) { // if PM,
+            var time = timeStr.replace('PM', ''),
+                hour = time.split(':')[0],
+                min = time.split(':')[1];
+
+            if (hour != '12') {
+                return (parseInt(hour) + 12) + ':' + min;
+            } else {
+                return hour + ':' + min;
+            }
+        } else {
+            return timeStr.replace('AM', '');
+        }
+    }
+
     var epochToUTC = function(st) {
         var hours = st.getUTCHours(),
             mins = st.getUTCMinutes();
@@ -185,9 +201,9 @@ angular.module('starter.controllers')
     }
 
     var inBetween = function(workout) {
-        if (workout.startTime > $scope.endTime) {
+        if (to24Hours(workout.startTime) > to24Hours($scope.endTime)) {
             return false;
-        } else if ($scope.startTime > workout.endTime) {
+        } else if (to24Hours($scope.startTime) > to24Hours(workout.endTime)) {
             return false;
         }
         return true;
