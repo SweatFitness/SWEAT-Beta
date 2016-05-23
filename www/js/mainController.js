@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('MainCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', 'Workouts', function($scope, $state, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList, Workouts) {
+.controller('MainCtrl', ['$scope', '$state', '$http', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', 'Workouts', function($scope, $state, $http, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList, Workouts) {
     $scope.pickedDate = 'Pick a date';
     $scope.startTime = 'Pick a start time';
     $scope.endTime = 'Pick an end time';
@@ -7,6 +7,10 @@ angular.module('starter.controllers')
     $scope.getUserName = function(uid) {
         console.log('getusername: ' + uid);
         return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
+    }
+    $scope.getPhoneNum = function(uid) {
+        console.log('getphone: ' + uid);
+        return UsersList.$getRecord(uid).phone;
     }
 
     $scope.toggleLeft = function() {
@@ -165,10 +169,20 @@ angular.module('starter.controllers')
         $scope.closeModal();
     }
 
-        /* TODO
     $scope.sendRequest = function(match) {
+        $http({
+            method: 'GET',
+            url: 'https://aqueous-ocean-69673.herokuapp.com/sendText',
+            // FOR DEBUGGING: 
+            // url: 'http://localhost:5000/sendText',
+            params: {
+                'num': $scope.getPhoneNum(match.ownerUid),
+                'msg': '[SWEAT] ' + $scope.getUserName(Auth.$getAuth().uid) + ' wants to work out with you! Open the SWEAT app to confirm'
+            }
+        }).then(function() {
+            $scope.closeModal();
+        });
     }
-    */
 
     var inBetween = function(workout) {
         if (workout.startTime > $scope.endTime) {
@@ -205,11 +219,12 @@ angular.module('starter.controllers')
                         console.log('Matches!!!');
                         $scope.yesMatch = true;
                         match.push({
+                            'ownerUid': workout.owner,
                             'name': $scope.getUserName(workout.owner),
                             'start': workout.startTime,
                             'end': workout.endTime,
                             'location': workout.location,
-                            'numpeople': workout.numpeople
+                            'numpeople': workout.numpeople,
                         });
                     }
                 }
