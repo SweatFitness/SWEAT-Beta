@@ -4,6 +4,11 @@ angular.module('starter.controllers')
     $scope.startTime = 'Pick a start time';
     $scope.endTime = 'Pick an end time';
 
+    $scope.getUserName = function(uid) {
+        console.log('getusername: ' + uid);
+        return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
+    }
+
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
@@ -17,6 +22,10 @@ angular.module('starter.controllers')
             ]
         });
     };
+
+    var showForm = function() {
+        $scope.selectModal.show();
+    }
 
     var epochToUTC = function(st) {
         var hours = st.getUTCHours(),
@@ -102,17 +111,25 @@ angular.module('starter.controllers')
     });
 
     $scope.closeModal = function() {
-        $scope.selectModal.hide();
+        $scope.reset();
     }
 
     $scope.nextSlide = function() {
         $ionicSlideBoxDelegate.next();
     }
 
+    $scope.reset = function() {
+        $scope.pickedDate = 'Pick a date';
+        $scope.startTime = 'Pick a start time';
+        $scope.endTime = 'Pick an end time';
+        $scope.matches = [];
+        $ionicSlideBoxDelegate.slide(0);
+        $scope.selectModal.hide();
+    }
+
     $scope.prevSlide = function() {
         $ionicSlideBoxDelegate.previous();
     }
-
 
     $scope.locationList = [
         { text: "SPAC", value: "SPAC" },
@@ -142,29 +159,68 @@ angular.module('starter.controllers')
             location: $scope.location,
             numpeople: $scope.numpeople,
             date: $scope.pickedDate,
-            startTime: $scope.pickedTime,
-            endTime: $scope.pickedTime
+            startTime: $scope.startTime,
+            endTime: $scope.endTime,
         });
         $scope.closeModal();
     }
 
-    $scope.findSuggestions = function(newWorkout) {
+        /* TODO
+    $scope.sendRequest = function(match) {
+    }
+    */
+
+    var inBetween = function(workout) {
+        if (workout.startTime > $scope.endTime) {
+            return false;
+        } else if ($scope.startTime > workout.endTime) {
+            return false;
+        }
+        return true;
+    }
+
+    $scope.findSuggestions = function() {
         var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
         workoutsRef.once('value', function(snapshot) {
             allWorkouts = snapshot.val();
+            console.log(allWorkouts);
             match = [];
-            /*
-            allWorkouts.forEach(function(workout) {
-                // Check date
-                if (workout.date != newWorkout) {
-                    continue;
+            if (allWorkouts) {
+                for (var id in allWorkouts) {
+                    if (allWorkouts.hasOwnProperty(id)) {
+                        var workout = allWorkouts[id];
+
+                        if (workout.date != $scope.pickedDate) {
+                            console.log('date doesnt match');
+                            continue;
+                        }
+                        if (!inBetween(workout)) {
+                            console.log('time doesnt match');
+                            continue;
+                        }
+                        if (workout.owner == Auth.$getAuth().uid) {
+                            console.log('user is same');
+                            continue;
+                        }
+                        console.log('Matches!!!');
+                        $scope.yesMatch = true;
+                        match.push({
+                            'name': $scope.getUserName(workout.owner),
+                            'start': workout.startTime,
+                            'end': workout.endTime,
+                            'location': workout.location,
+                            'numpeople': workout.numpeople
+                        });
+                    }
                 }
-                // Check time
-            });
-           */
+                $scope.matches = match;
+                console.log($scope.matches);
+                $scope.nextSlide();
+            } else {
+                $scope.noMatch = true;
+                $scope.matches = [];
+                $scope.nextSlide();
+            }
         });
     }
-
-
-
 }]);

@@ -24,7 +24,6 @@
         <button class="button button-full button-assertive" ng-click="prevSlide()">
             Back
         </button>
-
         </ion-slide> <!-- End of datepicker -->
         
         <!-- Start of location form -->
@@ -90,17 +89,32 @@
 
         <!-- Start of Suggestions form -->
         <ion-slide class="padding">  
-        <h4> 
-        <ion-list class="numpeople">
+        <p ng-if="noMatch">
+            <strong>Oops, we weren't able to find any that matches your workout.. :/ </strong>
+        </p>
 
+        <h4 ng-if="yesMatch"> Here are some workouts that you might be interested in joining </h4>
+        <div ng-if="yesMatch" class="list card">
+            <a ng-repeat="match in matches" class="item item-text-wrap" ng-click="sendRequest(match)">
+                <strong>{{match.name}}</strong>
+                <br/>
+                {{match.start}} until {{match.end}}
+                <br/>
+                At {{match.location}}
+                <br/>
+                Click to join {{match.name}}
+                <br/>
+            </a>
+        </div>
         <button class="button button-full button-calm" ng-click="createWorkout()">
-            Create Workout
+            I don't want to join any of these. <br/>
+            Create my own.
         </button>
+
         <button class="button button-full button-assertive" ng-click="prevSlide()">
             Back
         </button>
         </ion-slide>
-        <!-- End of Expertise form -->
         </ion-slide-box>
     </ion-content>
 </ion-modal-view>

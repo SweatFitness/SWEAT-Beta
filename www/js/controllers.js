@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
 }])
 
 .factory('UsersList', ['$firebaseArray', function($firebaseArray) {
-    var usersRef = new Firebase('https://sweatfitness.firebaseio.com/users');
+    var usersRef = new Firebase('https://sweatfitness.firebaseio.com/user');
     return $firebaseArray(usersRef);
 }])
 
