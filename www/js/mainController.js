@@ -5,11 +5,9 @@ angular.module('starter.controllers')
     $scope.endTime = 'Pick an end time';
 
     $scope.getUserName = function(uid) {
-        console.log('getusername: ' + uid);
         return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
     }
     $scope.getPhoneNum = function(uid) {
-        console.log('getphone: ' + uid);
         return UsersList.$getRecord(uid).phone;
     }
 
@@ -64,7 +62,6 @@ angular.module('starter.controllers')
     var ipObj2 = {
         callback: function (val) {      //Mandatory
             if (typeof (val) === 'undefined') {
-                console.log('Time not selected');
             } else {
                 var selectedTime = new Date(val * 1000);
                 $scope.startTime = epochToUTC(selectedTime);
@@ -79,7 +76,6 @@ angular.module('starter.controllers')
     var ipObj3 = {
         callback: function (val) {      //Mandatory
             if (typeof (val) === 'undefined') {
-                console.log('Time not selected');
             } else {
                 var selectedTime = new Date(val * 1000);
                 $scope.endTime = epochToUTC(selectedTime);
@@ -93,7 +89,6 @@ angular.module('starter.controllers')
 
     var ipObj1 = {
         callback: function (val) {  //Mandatory
-            console.log('Return value from the datepicker popup is : ' + val, new Date(val));
             date = new Date(val);
             $scope.pickedDate = date.toDateString();
         },
@@ -213,7 +208,6 @@ angular.module('starter.controllers')
         var workoutsRef = new Firebase('https://sweatfitness.firebaseio.com/workouts');
         workoutsRef.once('value', function(snapshot) {
             allWorkouts = snapshot.val();
-            console.log(allWorkouts);
             match = [];
             if (allWorkouts) {
                 for (var id in allWorkouts) {
@@ -221,18 +215,14 @@ angular.module('starter.controllers')
                         var workout = allWorkouts[id];
 
                         if (workout.date != $scope.pickedDate) {
-                            console.log('date doesnt match');
                             continue;
                         }
                         if (!inBetween(workout)) {
-                            console.log('time doesnt match');
                             continue;
                         }
                         if (workout.owner == Auth.$getAuth().uid) {
-                            console.log('user is same');
                             continue;
                         }
-                        console.log('Matches!!!');
                         $scope.yesMatch = true;
                         match.push({
                             'ownerUid': workout.owner,
@@ -245,7 +235,6 @@ angular.module('starter.controllers')
                     }
                 }
                 $scope.matches = match;
-                console.log($scope.matches);
                 $scope.nextSlide();
             } else {
                 $scope.noMatch = true;
