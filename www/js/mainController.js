@@ -1,5 +1,7 @@
 angular.module('starter.controllers')
 .controller('MainCtrl', ['$scope', '$state', '$http', '$ionicSideMenuDelegate', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicPopup', 'ionicDatePicker', 'ionicTimePicker', 'Auth', 'UsersList', 'Workouts', function($scope, $state, $http, $ionicSideMenuDelegate, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, ionicDatePicker, ionicTimePicker, Auth, UsersList, Workouts) {
+    var messageQueue = new Firebase('https://sweatfitness.firebaseio.com/messageQueue');
+
     $scope.pickedDate = 'Pick a date';
     $scope.startTime = 'Pick a start time';
     $scope.endTime = 'Pick an end time';
@@ -181,6 +183,7 @@ angular.module('starter.controllers')
     }
 
     $scope.sendRequest = function(match) {
+        var name = $scope.getUserName(Auth.$getAuth().uid);
         $http({
             method: 'GET',
             url: 'https://aqueous-ocean-69673.herokuapp.com/sendText',
@@ -188,9 +191,16 @@ angular.module('starter.controllers')
             // url: 'http://localhost:5000/sendText',
             params: {
                 'num': $scope.getPhoneNum(match.ownerUid),
-                'msg': '[SWEAT] ' + $scope.getUserName(Auth.$getAuth().uid) + ' wants to work out with you! Open the SWEAT app to confirm'
+                'msg': '[SWEAT] ' + name + ' wants to work out with you! Reply to this message with \'Yes\' if you want to work out with ' + name
             }
         }).then(function() {
+            messageQueue.child(match.ownerUid).push({
+                'from_phone': $scope.getPhoneNum(Auth.$getAuth().uid),
+                'to_name': $scope.getUserName(match.ownerUid),
+                'from_name': $scope.getUserName(Auth.$getAuth().uid),
+                'location': match.location,
+                'at': match.start
+            });
             $scope.closeModal();
         });
     }
