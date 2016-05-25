@@ -174,7 +174,8 @@ angular.module('starter.controllers')
         Workouts.$add({
             owner: Auth.$getAuth().uid,
             location: $scope.location,
-            numpeople: $scope.numpeople,
+            maxpeople: $scope.numpeople,
+            numpeople: 0,
             date: $scope.pickedDate,
             startTime: $scope.startTime,
             endTime: $scope.endTime,
@@ -231,6 +232,9 @@ angular.module('starter.controllers')
                             continue;
                         }
                         if (workout.owner == Auth.$getAuth().uid) {
+                            continue;
+                        }
+                        if (workout.numpeople >= workout.maxpeople) {
                             continue;
                         }
                         $scope.yesMatch = true;

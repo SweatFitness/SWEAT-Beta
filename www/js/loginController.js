@@ -40,7 +40,8 @@ angular.module('starter.controllers')
         { text: "Expert", value: "expert" }
     ];
 
-    $scope.usersRef = new Firebase('https://sweatfitness.firebaseio.com/user')
+    $scope.usersRef = new Firebase('https://sweatfitness.firebaseio.com/user');
+    $scope.phoneToUser = new Firebase('https://sweatfitness.firebaseio.com/phoneToUser');
 
 
     // This brings up signup modals
@@ -98,6 +99,7 @@ angular.module('starter.controllers')
                 p_expectations: $scope.partner_expectation,
                 a_expectations: $scope.app_expectation,
             });
+            $scope.phoneToUser.child('+1' + $scope.data.phone).set(userData.uid);
             $scope.loginEmail();
             $scope.closeModal();
         }).catch(function(error) {
