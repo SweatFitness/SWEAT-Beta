@@ -218,7 +218,7 @@ angular.module('starter.controllers')
             // url: 'http://localhost:5000/sendText',
             params: {
                 'num': $scope.getPhoneNum(match.ownerUid),
-                'msg': '[SWEAT] ' + name + ' wants to work out with you at ' + match.location + ' on ' + match.date + '! Reply to this message with \'Yes\' if you want to work out with ' + name
+                'msg': '[SWEAT] ' + name + ' wants to work out with you at ' + match.location + ' on ' + match.date + ', ' + match.start + '! Reply to this message with \'Yes\' if you want to work out with ' + name
             }
         }).then(function() {
             messageQueue.child(match.ownerUid).push({
@@ -226,7 +226,8 @@ angular.module('starter.controllers')
                 'to_name': $scope.getUserName(match.ownerUid),
                 'from_name': $scope.getUserName(Auth.$getAuth().uid),
                 'location': match.location,
-                'at': match.start
+                'at': match.start,
+                'date': match.date
             });
             $scope.closeModal();
         });

@@ -98,6 +98,8 @@
             <a ng-repeat="match in matches" class="item item-text-wrap" ng-click="sendRequest(match)">
                 <strong>{{match.name}}</strong>
                 <br/>
+                {{match.date}}
+                <br/>
                 {{match.start}} until {{match.end}}
                 <br/>
                 At {{match.location}}
