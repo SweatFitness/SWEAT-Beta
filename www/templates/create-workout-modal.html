@@ -61,7 +61,7 @@
         <ion-checkbox ng-model="workouts.weight.biceps">Back/Biceps</ion-checkbox>
         <ion-checkbox ng-model="workouts.weight.legs">Legs</ion-checkbox>
         </ion-list>
-        <button class="button button-full button-calm" ng-click="nextSlide()">
+        <button class="button button-full button-calm" ng-click="saveWorkoutTypes()">
             Next
         </button>
         <button class="button button-full button-assertive" ng-click="prevSlide()">
@@ -101,6 +101,10 @@
                 {{match.start}} until {{match.end}}
                 <br/>
                 At {{match.location}}
+                <br/>
+                <p ng-repeat="type in match.types">
+                {{type}}
+                </p>
                 <br/>
                 Click to join {{match.name}}
                 <br/>

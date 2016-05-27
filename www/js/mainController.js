@@ -5,6 +5,7 @@ angular.module('starter.controllers')
     $scope.pickedDate = 'Pick a date';
     $scope.startTime = 'Pick a start time';
     $scope.endTime = 'Pick an end time';
+    $scope.workouts = {};
 
     $scope.getUserName = function(uid) {
         return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
@@ -170,7 +171,31 @@ angular.module('starter.controllers')
         $scope.numpeople = numpeople.value;
     }
 
+    $scope.saveWorkoutTypes = function() {
+        $scope.workoutTypes = $scope.formWorkoutTypes();
+        $scope.nextSlide();
+    }
+
+    $scope.formWorkoutTypes = function() {
+        console.log($scope.workouts);
+        var types = [];
+        // This is super jank but whatever
+        for (var workout in $scope.workouts.cardio) {
+            if($scope.workouts.cardio.hasOwnProperty(workout)) {
+                types.push(workout);
+            }
+        }
+        for (var workout in $scope.workouts.weight) {
+            if($scope.workouts.weight.hasOwnProperty(workout)) {
+                types.push(workout);
+            }
+        }
+        console.log(types);
+        return types;
+    }
+
     $scope.createWorkout = function() {
+        var types = $scope.formWorkoutTypes();
         Workouts.$add({
             owner: Auth.$getAuth().uid,
             location: $scope.location,
@@ -179,6 +204,7 @@ angular.module('starter.controllers')
             date: $scope.pickedDate,
             startTime: $scope.startTime,
             endTime: $scope.endTime,
+            types: types
         });
         $scope.closeModal();
     }
@@ -192,7 +218,7 @@ angular.module('starter.controllers')
             // url: 'http://localhost:5000/sendText',
             params: {
                 'num': $scope.getPhoneNum(match.ownerUid),
-                'msg': '[SWEAT] ' + name + ' wants to work out with you! Reply to this message with \'Yes\' if you want to work out with ' + name
+                'msg': '[SWEAT] ' + name + ' wants to work out with you at ' + match.location + ' on ' + match.date + '! Reply to this message with \'Yes\' if you want to work out with ' + name
             }
         }).then(function() {
             messageQueue.child(match.ownerUid).push({
@@ -245,6 +271,8 @@ angular.module('starter.controllers')
                             'end': workout.endTime,
                             'location': workout.location,
                             'numpeople': workout.numpeople,
+                            'date': workout.date,
+                            'types': workout.types
                         });
                     }
                 }
