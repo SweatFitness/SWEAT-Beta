@@ -20,7 +20,7 @@ Back
 
     <br/>
     <div ng-if="yesMatch" class="list card">
-    <a ng-repeat="match in allRequests" class="item item-text-wrap" ng-click="sendRequest(match)">
+        <a ng-repeat="match in allRequests" class="item item-text-wrap" href="tel:+1{{match.from_phone}}">
         <strong>{{match.from_name}}</strong>
         <br/>
         {{match.date}}
@@ -29,9 +29,7 @@ Back
         <br/>
         Location: {{match.location}}
         <br/>
-        <button href="tel:+1{{match.from_phone}}">
         Click to call {{match.name}}
-        </button>
         <br/>
     </a>
 </div>
