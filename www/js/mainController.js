@@ -13,6 +13,9 @@ angular.module('starter.controllers')
     $scope.showToday = function() {
         $state.go('today');
     }
+    $scope.showRequest = function() {
+        $state.go('request');
+    }
 
     $scope.getPhoneNum = function(uid) {
         return UsersList.$getRecord(uid).phone;

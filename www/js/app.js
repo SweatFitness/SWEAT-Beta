@@ -36,6 +36,11 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 templateUrl: 'templates/today.html',
                 controller: 'TodayCtrl'
             })
+            .state('request', {
+                url: '/request',
+                templateUrl: 'templates/requests.html',
+                controller: 'RequestCtrl'
+            })
             .state('main', {
                 url: '/main',
                 templateUrl: 'templates/shell.html',
