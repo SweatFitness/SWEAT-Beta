@@ -1,0 +1,47 @@
+<ion-nav-bar>
+<ion-nav-back-button class="button" ng-click="goHome()">
+Back
+</ion-nav-back-button>
+</ion-nav-bar>
+<ion-view title="Pending Requests">
+<ion-content ng-controller="RequestCtrl" ng-init="checkRequests()">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div ng-if="yesMatch">
+    <h4> These people want to work out with you! </h4>
+    </div>
+    <div ng-if="!yesMatch">
+        <h4> No one wants to work out with you... yet </h4>
+    </div>
+
+    <br/>
+    <div ng-if="yesMatch" class="list card">
+    <a ng-repeat="match in allRequests" class="item item-text-wrap" ng-click="sendRequest(match)">
+        <strong>{{match.from_name}}</strong>
+        <br/>
+        {{match.date}}
+        <br/>
+        At {{match.at}}
+        <br/>
+        Location: {{match.location}}
+        <br/>
+        <button href="tel:+1{{match.from_phone}}">
+        Click to call {{match.name}}
+        </button>
+        <br/>
+    </a>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="bar bar-footer bar-assertive" ng-click="goHome()">
+      <div class="title">Close</div>
+</div>
+
+</ion-content>
+</ion-view>

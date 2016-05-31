@@ -1,0 +1,37 @@
+<ion-nav-bar>
+<ion-nav-back-button class="button" ng-click="goHome()">
+Back
+</ion-nav-back-button>
+</ion-nav-bar>
+<ion-view title="Today's Workouts">
+<ion-content ng-controller="TodayCtrl" ng-init="loadAllWorkouts()">
+<h4>Here are some workouts happening today</h4>
+
+<div ng-if="yesMatch" class="list card">
+    <a ng-repeat="match in today" class="item item-text-wrap" ng-click="sendRequest(match)">
+        <strong>{{match.name}}</strong>
+        <br/>
+        {{match.date}}
+        <br/>
+        {{match.start}} until {{match.end}}
+        <br/>
+        At {{match.location}}
+        <br/>
+        <p ng-repeat="type in match.types">
+        {{type}}
+        </p>
+        <br/>
+        Click to join {{match.name}}
+        <br/>
+    </a>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="bar bar-footer bar-assertive" ng-click="goHome()">
+      <div class="title">Close</div>
+</div>
+
+</ion-content>
+</ion-view>
