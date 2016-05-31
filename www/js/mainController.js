@@ -10,6 +10,10 @@ angular.module('starter.controllers')
     $scope.getUserName = function(uid) {
         return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
     }
+    $scope.showToday = function() {
+        $state.go('today');
+    }
+
     $scope.getPhoneNum = function(uid) {
         return UsersList.$getRecord(uid).phone;
     }
