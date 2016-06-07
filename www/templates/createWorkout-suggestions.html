@@ -1,0 +1,38 @@
+<ion-view cache-view="false" view-title="Let's Start Sweating!">
+<ion-content class="padding">
+    <p ng-if="workoutModel.noMatch">
+        <strong>Oops, we weren't able to find any that matches your workout.. :/ </strong>
+    </p>
+
+    <h4 ng-if="!workoutModel.noMatch"> Here are some workouts that you might be interested in joining </h4>
+    <div ng-if="!workoutModel.noMatch" class="list card">
+        <a ng-repeat="match in workoutModel.matches" class="item item-text-wrap" ng-click="sendRequest(match)">
+            <strong>{{match.name}}</strong>
+            <br/>
+            {{match.date}}
+            <br/>
+            {{match.start}} until {{match.end}}
+            <br/>
+            At {{match.location}}
+            <br/>
+            <p ng-repeat="type in match.types">
+            {{type}}
+            </p>
+            <br/>
+            Click to join {{match.name}}
+            <br/>
+        </a>
+    </div>
+    <button ng-if="workoutModel.noMatch" class="button button-full button-calm" ng-click="createWorkout()">
+        Create my own.
+    </button>
+    <button ng-if="!workoutModel.noMatch" class="button button-full button-calm" ng-click="createWorkout()">
+        I don't want to join any of these. <br/>
+        Create my own.
+    </button>
+
+    <button class="button button-full button-assertive" ng-click="createWorkout_prev()">
+        Back
+    </button>
+</ion-content>
+</ion-view>

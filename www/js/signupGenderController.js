@@ -13,4 +13,12 @@ angular.module('starter.controllers')
     $scope.updateGender = function(gender) {
         $scope.userModel.gender = gender.value;
     }
+
+    $scope.signup_next = function() {
+        $state.go('signup-expertise', {userModel:$scope.userModel});
+    }
+
+    $scope.signup_prev = function() {
+        $state.go('signup-basicInfo', {userModel:$scope.userModel});
+    }
 }])

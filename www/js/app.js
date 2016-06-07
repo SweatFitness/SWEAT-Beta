@@ -36,6 +36,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 url: '/signup-basicInfo',
                 templateUrl: 'templates/signup-basicInfo.html',
                 controller: 'signupBasicInfoCtrl',
+                cache: false,
                 params: {
                     userModel: {}
                 }
@@ -44,6 +45,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 url: '/signup-gender',
                 templateUrl: 'templates/signup-gender.html',
                 controller: 'signupGenderCtrl',
+                cache: false,
                 params: {
                     userModel: {}
                 }
@@ -52,6 +54,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 url: '/signup-expertise',
                 templateUrl: 'templates/signup-expertise.html',
                 controller: 'signupExpertiseCtrl',
+                cache: false,
                 params: {
                     userModel: {}
                 }
@@ -60,8 +63,54 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 url: '/signup-goals',
                 templateUrl: 'templates/signup-goals.html',
                 controller: 'signupGoalsCtrl',
+                cache: false,
                 params: {
                     userModel: {}
+                }
+            })
+            .state('createworkout-datetime', {
+                url: '/createworkout-datetime',
+                templateUrl: 'templates/createWorkout-datetime.html',
+                controller: 'CreateWorkoutDateTimeCtrl',
+                cache: false,
+                params: {
+                    workoutModel: {}
+                }
+            })
+            .state('createworkout-location', {
+                url: '/createworkout-location',
+                templateUrl: 'templates/createWorkout-location.html',
+                controller: 'CreateWorkoutLocationCtrl',
+                cache: false,
+                params: {
+                    workoutModel: {}
+                }
+            })
+            .state('createworkout-type', {
+                url: '/createworkout-type',
+                templateUrl: 'templates/createWorkout-type.html',
+                controller: 'CreateWorkoutTypeCtrl',
+                cache: false,
+                params: {
+                    workoutModel: {}
+                }
+            })
+            .state('createworkout-numpeople', {
+                url: '/createworkout-numpeople',
+                templateUrl: 'templates/createWorkout-numPeople.html',
+                controller: 'CreateWorkoutNumPeopleCtrl',
+                cache: false,
+                params: {
+                    workoutModel: {}
+                }
+            })
+            .state('createworkout-suggestions', {
+                url: '/createworkout-suggestions',
+                templateUrl: 'templates/createWorkout-suggestions.html',
+                controller: 'CreateWorkoutSuggestionsCtrl',
+                cache: false,
+                params: {
+                    workoutModel: {}
                 }
             })
             .state('today', {

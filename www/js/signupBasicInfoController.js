@@ -5,4 +5,13 @@ angular.module('starter.controllers')
 		$scope.userModel = $stateParams.userModel;
 	});
 
+	$scope.$on('dismissForm', function() {
+		console.log('dismissForm');
+		$state.go('login');
+	})
+
+	$scope.signup_next = function() {
+		$state.go('signup-gender', {userModel:$scope.userModel});
+	}
+
 }])

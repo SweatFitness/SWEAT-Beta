@@ -1,5 +1,5 @@
 <!-- Start of Goals form -->
-<ion-slide cache-view="false">
+<ion-view cache-view="false" view-title="Sign Up">
 <ion-content class="padding">
     <h4> What are your goals? </h4>
     <ion-list>
@@ -10,9 +10,9 @@
     <button class="button button-full button-calm" ng-click="signupEmail()">
         Done
     </button>
-    <button class="button button-full button-assertive" ui-sref="signup-expertise({userModel:userModel})">
+    <button class="button button-full button-assertive" ng-click="signup_prev()">
         Back
     </button>
 </ion-content>
-</ion-slide>
+</ion-view>
 <!-- End of Goals form -->

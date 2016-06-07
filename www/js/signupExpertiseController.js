@@ -14,4 +14,12 @@ angular.module('starter.controllers')
     $scope.updateExperience = function(experience) {
         $scope.userModel.experience = experience.value;
     }
+
+    $scope.signup_next = function() {
+        $state.go('signup-goals', {userModel:$scope.userModel});
+    }
+
+    $scope.signup_prev = function() {
+        $state.go('signup-gender', {userModel:$scope.userModel});
+    }
 }])

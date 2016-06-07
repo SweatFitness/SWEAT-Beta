@@ -9,18 +9,28 @@ angular.module('starter.controllers')
         $scope.userModel.goal.lean = false;
         $scope.userModel.goal.fit = false;
         $scope.userModel.goal.muscles = false;
+        $scope.userModel.email={};
+        $scope.userModel.email.txt="";
+        $scope.userModel.firstname={};
+        $scope.userModel.firstname.txt="";
+        $scope.userModel.lastname={};
+        $scope.userModel.lastname.txt="";
+        $scope.userModel.password={};
+        $scope.userModel.password.txt="";
+        $scope.userModel.phone={};
+        $scope.userModel.phone.txt="";
+
 
         $scope.userModel.gender = "";
     }
+
     $scope.$on('$ionicView.beforeEnter', function() {
         __initUserModel();
     });
 
-    $scope.$on('signupComplete', function(event, args) {
-        $scope.data.email = args.email;
-        $scope.data.password = args.password;
-        $scope.loginEmail();
-    });
+    $scope.signup = function() {
+        $state.go('signup-basicInfo',{userModel:$scope.userModel});
+    }
 
     $scope.loginEmail = function(){
         Auth.$authWithPassword({

@@ -8,10 +8,10 @@
             {{item.text}}
         </ion-radio>
     </ion-list>
-    <button class="button button-full button-calm" ui-sref="signup-goals({userModel:userModel})">
+    <button class="button button-full button-calm" ng-click="signup_next()">
         Next
     </button>
-    <button class="button button-full button-assertive" ui-sref="signup-gender({userModel:userModel})">
+    <button class="button button-full button-assertive" ng-click="signup_prev()">
         Back
     </button>
 </ion-content>

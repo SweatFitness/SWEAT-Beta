@@ -1,0 +1,16 @@
+<ion-view cache-view="false" view-title="Let's Start Sweating!">
+<ion-content class="padding">
+    <h4> Where are you working out? </h4>
+    <ion-list>
+        <ion-radio ng-repeat="item in locationList" ng-value="item.value" ng-model="workoutModel.location" ng-change="updateLocation(item)">
+            {{item.text}}
+        </ion-radio>
+    </ion-list>
+    <button class="button button-full button-calm" ng-click="createWorkout_next()" nav-direction="forward">
+        Next
+    </button>
+    <button class="button button-full button-assertive" ng-click="createWorkout_prev()" nav-direction="back">
+        Back
+    </button>
+</ion-content>
+</ion-view>

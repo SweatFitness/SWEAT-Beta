@@ -1,0 +1,20 @@
+<ion-view cache-view="false" view-title="Let's Start Sweating!">
+<ion-content class="padding">
+    <h4> When are you planning to work out? </h4>
+    <button class="button button-full button-stable" ng-click="openDatePicker()">
+        {{ workoutModel.pickedDate}}
+    </button>
+    <button class="button button-full button-stable" ng-click="openStartTimePicker()">
+        {{ workoutModel.startTime }}
+    </button>
+    <button class="button button-full button-stable" ng-click="openEndTimePicker()">
+        {{ workoutModel.endTime }}
+    </button>
+    <button class="button button-full button-calm" ng-click="createWorkout_next()" nav-direction="forward">
+        Next
+    </button>
+    <button class="button button-full button-assertive" ui-sref="main.home()" nav-direction="back">
+        Back
+    </button>
+</ion-content>
+</ion-view> <!-- End of datepicker -->

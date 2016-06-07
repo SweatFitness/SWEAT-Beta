@@ -1,0 +1,26 @@
+<ion-view cache-view="false" view-title="Let's Start Sweating!">
+<ion-content class="padding">  
+    <h4> What type of workout will you be doing? </h4>
+    <br />
+    <h4> (Choose all that you're interested in) </h4>
+    <h3> Cardio </h3>
+    <ion-list>
+        <ion-checkbox ng-model="workoutModel.workouts.cardio.running">Running</ion-checkbox>
+        <ion-checkbox ng-model="workoutModel.workouts.cardio.cycling">Cycling</ion-checkbox>
+        <ion-checkbox ng-model="workoutModel.workouts.cardio.swimming">Swimming</ion-checkbox>
+    </ion-list>
+
+    <h3> Weightlifting </h3>
+    <ion-list>
+        <ion-checkbox ng-model="workoutModel.workouts.weight.triceps">Chest/Triceps</ion-checkbox>
+        <ion-checkbox ng-model="workoutModel.workouts.weight.biceps">Back/Biceps</ion-checkbox>
+        <ion-checkbox ng-model="workoutModel.workouts.weight.legs">Legs</ion-checkbox>
+    </ion-list>
+    <button class="button button-full button-calm" ng-click="saveWorkoutTypes()" nav-direction="forward">
+        Next
+    </button>
+    <button class="button button-full button-assertive" ng-click="createWorkout_prev()" nav-direction="back">
+        Back
+    </button>
+</ion-content>
+</ion-view>
