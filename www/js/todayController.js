@@ -47,7 +47,6 @@ angular.module('starter.controllers')
             });
             usersRef.child(match.ownerUid).child('recent_request').set({
                 'workout': match.id,
-                'request': req
             });
             $state.go('main.home');
         });

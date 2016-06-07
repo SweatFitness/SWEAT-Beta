@@ -123,6 +123,11 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 templateUrl: 'templates/requests.html',
                 controller: 'RequestCtrl'
             })
+            .state('new-fb-user', {
+                url: '/newfb',
+                templateUrl: 'templates/newfb.html',
+                controller: 'NewFbCtrl'
+            })
             .state('main', {
                 url: '/main',
                 templateUrl: 'templates/shell.html',

@@ -47,4 +47,34 @@ angular.module('starter.controllers')
     $scope.cancelSignup = function() {
         $ionicHistory.goBack();
     };
+
+    $scope.loginFacebook = function() {
+        var ref = new Firebase("https://sweatfitness.firebaseio.com");
+        var fb = new Firebase('https://sweatfitness.firebaseio.com/user');
+        ref.authWithOAuthPopup("facebook", function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                var uid = authData.uid,
+                    dn = authData.facebook.displayName.split(' ');
+
+                console.log(uid);
+                fb.once('value', function(snapshot) {
+                    if (snapshot.hasChild(uid)) {
+                        $state.go('main.home');
+                    } else {
+                        newfb = new Firebase('https://sweatfitness.firebaseio.com/user/' + uid);
+                        console.log(newfb);
+                        newfb.set({
+                            'firstname': dn[0],
+                            'lastname': dn[dn.length-1],
+                        }, function() {
+                            $state.go('new-fb-user');
+                        });
+                    }
+                });
+            }
+        });
+    };
 }]);
