@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('RequestCtrl', ['$scope', '$state', '$ionicHistory', '$http', 'Auth', 'UsersList', function($scope, $state, $ionicHistory, $http, Auth, UsersList) {
+.controller('RequestCtrl', ['$scope', '$state', '$ionicHistory', '$ionicPopup', '$http', 'Auth', 'UsersList', function($scope, $state, $ionicHistory, $ionicPopup, $http, Auth, UsersList) {
     var messageQueue = new Firebase('https://sweatfitness.firebaseio.com/messageQueue');
     $scope.getUserName = function(uid) {
         return UsersList.$getRecord(uid).firstname + " " + UsersList.$getRecord(uid).lastname;
@@ -22,6 +22,17 @@ angular.module('starter.controllers')
         console.log('Checking:' + dateStr);
         return dateStr == (new Date()).toDateString();
     }
+
+    $scope.showRequestSentAlert = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Request Sent!',
+            template: 'Your workout request is sent.'
+        });
+
+        alertPopup.then(function(res) {
+            $state.go('main.home');
+        });
+    };
     
     $scope.sendRequest = function(match) {
         var name = $scope.getUserName(Auth.$getAuth().uid);
@@ -50,7 +61,7 @@ angular.module('starter.controllers')
                     'request': req
                 });
             });
-            $state.go('main.home');
+            $scope.showRequestSentAlert();
         });
     }
 
