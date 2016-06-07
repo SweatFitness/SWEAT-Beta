@@ -1,0 +1,18 @@
+<!-- Start of gender form -->
+<ion-view cache-view="false" view-title="Sign Up">
+<ion-content class="padding">
+    <h4> What is your gender? </h4>
+    <ion-list>
+        <ion-radio ng-repeat="item in genderList" ng-value="item.value" ng-model="userModel.gender" ng-change="updateGender(item)">
+            {{item.text}}
+        </ion-radio>
+    </ion-list>
+    <button class="button button-full button-calm" ui-sref="signup-expertise({userModel:userModel})">
+        Next
+    </button>
+    <button class="button button-full button-assertive" ui-sref="signup-basicInfo({userModel:userModel})">
+        Back
+    </button>
+</ion-content>
+</ion-view>
+<!-- End of gender form -->

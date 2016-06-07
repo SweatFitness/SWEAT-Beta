@@ -1,0 +1,19 @@
+<!-- Start of Expertise form -->
+<ion-view cache-view="false" view-titl="Sign Up">
+<ion-content class="padding">
+    <h4> What describes your workout experience most accurately? </h4>
+    <ion-list class="expertise">
+        
+        <ion-radio ng-repeat="item in experienceList" ng-value="item.value" ng-model="userModel.experience" ng-change="updateExperience(item)">
+            {{item.text}}
+        </ion-radio>
+    </ion-list>
+    <button class="button button-full button-calm" ui-sref="signup-goals({userModel:userModel})">
+        Next
+    </button>
+    <button class="button button-full button-assertive" ui-sref="signup-gender({userModel:userModel})">
+        Back
+    </button>
+</ion-content>
+</ion-view>
+<!-- End of Expertise form -->

@@ -31,6 +31,38 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             })
+            .state('signup-basicInfo', {
+                url: '/signup-basicInfo',
+                templateUrl: 'templates/signup-basicInfo.html',
+                controller: 'signupBasicInfoCtrl',
+                params: {
+                    userModel: {}
+                }
+            })
+            .state('signup-gender', {
+                url: '/signup-gender',
+                templateUrl: 'templates/signup-gender.html',
+                controller: 'signupGenderCtrl',
+                params: {
+                    userModel: {}
+                }
+            })
+            .state('signup-expertise', {
+                url: '/signup-expertise',
+                templateUrl: 'templates/signup-expertise.html',
+                controller: 'signupExpertiseCtrl',
+                params: {
+                    userModel: {}
+                }
+            })
+            .state('signup-goals', {
+                url: '/signup-goals',
+                templateUrl: 'templates/signup-goals.html',
+                controller: 'signupGoalsCtrl',
+                params: {
+                    userModel: {}
+                }
+            })
             .state('today', {
                 url: '/today',
                 templateUrl: 'templates/today.html',

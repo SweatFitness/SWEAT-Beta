@@ -1,4 +1,4 @@
-<ion-view view-title="Login">
+<ion-view hide-nav-bar="true" view-title="Login">
     <ion-content class="content-dark">
         <br /> <!-- Jank as fuck but need to get shit done quick -->
         <br />
@@ -32,11 +32,10 @@
                 Log In
             </button>
             <div class="text-center">
-                <button class="button button-clear button-positive" ng-click="selectModal.show()">
+                <button class="button button-clear button-positive" ui-sref="signup-basicInfo({userModel:userModel})">
                     Or create an account
                 </button>
             </div>
         </div>
     </ion-content>
-    <script type="text/ng-template" src="signup-modal.html"></script>
 </ion-view>
