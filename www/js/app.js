@@ -23,7 +23,8 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'ionic-da
         });
     })
 
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+        $ionicConfigProvider.backButton.text('').icon('ion-close-round').previousTitleText(false);
         $urlRouterProvider.otherwise('/');
         $stateProvider
             .state('login', {

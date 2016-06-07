@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('signupGoalsCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams, Auth, UsersList) {
+.controller('signupGoalsCtrl', ['$scope', '$state', '$stateParams', 'Auth', 'UsersList', function($scope, $state, $stateParams, Auth, UsersList) {
 	$scope.$on('$ionicView.beforeEnter', function() {
 		$scope.userModel = $stateParams.userModel;
 	});
@@ -23,7 +23,7 @@ angular.module('starter.controllers')
                 phone: $scope.userModel.phone,
                 gender: $scope.userModel.gender,
                 experience: $scope.userModel.experience,
-                goal: $scope.userModel.goal;
+                goal: $scope.userModel.goal,
                 p_expectations: $scope.userModel.partner_expectation,
                 a_expectations: $scope.userModel.app_expectation,
             });
